@@ -17,6 +17,7 @@ namespace Pathfinding {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
 		IAstarAI ai;
+        private Vector3 _targetPosition = Vector3.zero;
 
 		void OnEnable () {
 			ai = GetComponent<IAstarAI>();
@@ -34,6 +35,15 @@ namespace Pathfinding {
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
 			if (target != null && ai != null) ai.destination = target.position;
+            else if(_targetPosition != Vector3.zero)
+            {
+                ai.destination = _targetPosition;
+            }
 		}
+
+        public void TargetPosition(Vector3 _newPosition)
+        {
+            _targetPosition = _newPosition;
+        }
 	}
 }
