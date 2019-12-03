@@ -8,7 +8,7 @@ public class Script_Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire 1"))
+        if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
