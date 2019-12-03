@@ -24,6 +24,13 @@ public class Script_CharacterMovement : MonoBehaviour
         {
             Onclick();
         }
+
+
+        if (Input.GetButtonDown("Eat") && _targetGrass != null)
+        {
+            _targetGrass.Eat();
+        }
+
     }
 
     void Onclick()
@@ -39,6 +46,25 @@ public class Script_CharacterMovement : MonoBehaviour
             _aidestinationSetter.TargetPosition(hit.point);
         }
         // Créer un rayon a partir de la position de la souris et retourne ses coordonnées
+    }
+
+    public void OnGrassEnter(Script_Grass grass)
+    {
+        if (_targetGrass == null)
+        {
+            _targetGrass = grass;
+        }
+    }
+
+
+
+    public void OnGrassExit(Script_Grass grass)
+    {
+
+        if (grass == _targetGrass)
+        {
+            _targetGrass = null;
+        }
     }
 
 }

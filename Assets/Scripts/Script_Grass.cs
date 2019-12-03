@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Script_Grass : MonoBehaviour, Script_IEatable, Script_ITriggable
+public class Script_Grass : MonoBehaviour, Script_IEatable
 {
     public void Eat()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 
     public void Effect()
@@ -14,36 +14,20 @@ public class Script_Grass : MonoBehaviour, Script_IEatable, Script_ITriggable
         throw new System.NotImplementedException();
     }
 
-    public void Triggered(Collider objectInTrigger)
-    {
-
-        objectInTrigger.GetComponentInParent<Script_CharacterMovement>()._targetGrass = this;
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         
         if (other.CompareTag("Player"))
         {
-            Triggered(other);
+            other.GetComponentInParent<Script_CharacterMovement>().OnGrassEnter(this);        
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponentInParent<Script_CharacterMovement>().OnGrassExit(this);
+        }
     }
 }
